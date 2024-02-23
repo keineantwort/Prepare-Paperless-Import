@@ -19,30 +19,38 @@ def copy_file(path: str, target: str):
     file = os.path.basename(os.path.normpath(path))
     filename, file_extension = os.path.splitext(file)
     if file_extension[1:] in config.includes:
-        log.debug(f"> copying file {file} to {target}")
         target_dir = os.path.dirname(target)
         if not os.path.exists(target_dir):
             os.makedirs(target_dir)
+        if os.path.exists(target):
+            target_path, target_file = os.path.split(os.path.abspath(target))
+            target = os.path.join(target_path, f"{os.path.basename(os.path.dirname(os.path.abspath(path)))} - {target_file}")
+            log.debug("!!!!!!!!! --------- !!!!!!!!")
+        log.debug(f"> copying file {path} to {target}")
         shutil.copy2(path, target)
 
 
-def import_documents(root: str):
-    log.debug(f"crawling Directory: {root}")
-    directory = os.path.basename(os.path.normpath(root))
+def import_documents(import_path: str, target_dir: str = None):
+    log.debug(f"crawling Directory: {import_path}")
+    directory = os.path.basename(os.path.normpath(import_path))
     if directory in import_config.excludes:
-        log.debug(f"! EXCLUDE {root}")
+        log.debug(f"! EXCLUDE {import_path}")
         return
     if directory in import_config.flatten:
-        log.debug(f"(TODO) Flatten: {root}")
-        return
+        target_dir = os.path.join(config.target, os.path.basename(import_path))
+        log.debug(f"Flatten: {target_dir}")
     if directory in import_config.pullup:
-        log.debug(f"(TODO) Pullup: {root}")
+        log.debug(f"(TODO) Pullup: {import_path}")
         return
-    for path in [f.path for f in os.scandir(root)]:
+    for path in [f.path for f in os.scandir(import_path)]:
         if os.path.isdir(path):
-            import_documents(path)
+            import_documents(path, target_dir)
         elif os.path.isfile(path):
-            copy_file(path, os.path.join(config.target, path[len(import_dir) + 1:]))
+            target_file = os.path.join(config.target, path[len(import_dir) + 1:])
+            if target_dir:
+                target_file = os.path.join(target_dir, os.path.basename(os.path.normpath(path)))
+            log.debug(f"{path} > {target_file}")
+            copy_file(path, target_file)
 
 
 def prepare_target():

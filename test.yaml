@@ -1,4 +1,4 @@
-root: /Users/martin/Documents
+root: "/Users/martin/tmp/TEST IMPORT"
 target: "/Users/martin/tmp/paperless import"
 includes:
   - pdf
@@ -8,6 +8,8 @@ imports:
     excludes:
       - ProCredit
       - TFBank
+      - DKB
+      - "Deutsche Bank"
     flatten:
       - 1822direkt
     pullup:

@@ -1,0 +1,15 @@
+root: /Users/martin/Documents
+target: "/Users/martin/tmp/paperless import"
+includes:
+  - pdf
+imports:
+  -
+    dir: Bank
+    excludes:
+      - ProCredit
+      - TFBank
+    flatten:
+      - 1822direkt
+    pullup:
+      - eSafe
+      - Postfach

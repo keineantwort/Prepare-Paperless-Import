@@ -6,16 +6,17 @@ NO WARRANTY for any problems! Use with care!
 ## Configuration
 You need to create a `yaml` file to configure the import.
 
-| field      | description                                                                              | Example                         |
-|------------|------------------------------------------------------------------------------------------|---------------------------------|
-| `root`     | the root directory where all import directories are located                              | `/Users/martin/tmp/IMPORT`      |
-| `target`   | the paperless dropoff import directory                                                   | `/Users/martin/_drop`           |
-| `includes` | a list of filetypes to import                                                            | `- pdf`<br/>`-jpg`              |
-| `imports`  | a list of directories to import with their import configuration                          |                                 |
-| `dir`      | the directory name to import, which is located in `root`                                 | `Bank`                          |
-| `excludes` | list of directories which should not be imported, but are located in `dir`               | `- Kontoauszüge`<br/>`- Name2`  |
-| `flatten`  | list of directories where all files subdirectories from subdirectories should be removed |                                 |
-| `pullup`   | nearly the same as flatten, but the directory itself will be removed too                 |                                 |
+| field        | description                                                                              | Example                        |
+|--------------|------------------------------------------------------------------------------------------|--------------------------------|
+| `root`       | the root directory where all import directories are located                              | `/Users/martin/tmp/IMPORT`     |
+| `target`     | the paperless dropoff import directory                                                   | `/Users/martin/_drop`          |
+| `includes`   | a list of filetypes to import                                                            | `- pdf`<br/>`-jpg`             |
+| `imports`    | a list of directories to import with their import configuration                          |                                |
+| `dir`        | the directory name to import, which is located in `root`                                 | `Bank`                         |
+| `targetdir`  | the target for this import as subdirectory of `target`                                   | `Bank`                         |
+| `excludes`   | list of directories which should not be imported, but are located in `dir`               | `- Kontoauszüge`<br/>`- Name2` |
+| `flatten`    | list of directories where all files subdirectories from subdirectories should be removed |                                |
+| `pullup`     | nearly the same as flatten, but the directory itself will be removed too                 |                                |
 
 
 Example:

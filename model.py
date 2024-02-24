@@ -5,6 +5,7 @@ from typing import List
 @dataclass
 class YamlConfigImport:
     dir: str
+    targetdir: str
     excludes: List[str]
     flatten: List[str]
     pullup: List[str]
@@ -23,6 +24,7 @@ class YamlConfig:
         for im in yaml_as_dict["imports"]:
             imports += [YamlConfigImport(
                 dir=im["dir"],
+                targetdir=im["targetdir"],
                 excludes=im["excludes"],
                 flatten=im["flatten"],
                 pullup=im["pullup"]

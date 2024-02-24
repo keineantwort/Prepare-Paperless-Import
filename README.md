@@ -20,14 +20,15 @@ You need to create a `yaml` file to configure the import.
 
 Example:
 ```
-root: /Users/martin/tmp/IMPORT
+root: /Users/martin/tmp/
 target: "/Users/martin/paperless ngx/_drop"
 includes:
   - pdf
   - jpg
 imports:
   -
-    dir: Bank
+    dir: IMPORT/Bank
+    targetdir: Bank
     excludes:
       - Bank1
       - "other Bank"
@@ -35,6 +36,12 @@ imports:
       - Bank 3
     pullup:
       - Postfach
+  -
+    dir: Another Bank Folder
+    targetdir: Bank
+    excludes:
+    flatten:
+    pullup:
 ```
 
 Source file tree
@@ -45,24 +52,27 @@ Users
       +- IMPORT
         +- Bank
           +- Bank1
-          | +- Doc1.pdf
-          | +- Doc2.pdf
+            +- Doc1.pdf
+            +- Doc2.pdf
           +- Bank2
-          | +- Doc 3.pdf
-          | +- some Excel file.xlsx
+            +- Doc 3.pdf
+            +- some Excel file.xlsx
           +- other Bank
-          | +- Doc 4.pdf
+            +- Doc 4.pdf
           +- Bank 3
-          | +- Doc 1.pdf
-          | +- somedir
-          |   +- Doc 1.pdf
+            +- Doc 1.pdf
+            +- somedir
+              +- Doc 1.pdf
           +- Bank 4
             +- Postfach
-            | +- 2023
-            | | +- Doc 1.pdf
-            | +- 2024
-            | | +- Doc 2.pdf
+              +- 2023
+                +- Doc 1.pdf
+              +- 2024
+                +- Doc 2.pdf
             +- Doc 1.pdf
+      +- Another Bank Folder
+        +- Bank2
+          +- Doc 10.pdf
 ```
 
 Result:
@@ -73,10 +83,11 @@ Users
       +- IMPORT
         +- Bank
           +- Bank2
-          | +- Doc 3.pdf
+            +- Doc 3.pdf
+            +- Doc 10.pdf
           +- Bank 3
-          | +- Doc 1.pdf
-          | +- somedir - Doc 1.pdf
+            +- Doc 1.pdf
+            +- somedir - Doc 1.pdf
           +- Bank 4
             +- Doc 1.pdf
             +- Doc 2.pdf

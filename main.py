@@ -6,7 +6,7 @@ import logging
 from log import init_logger
 from model import *
 
-FILEINPUT = "Bank.yaml"
+FILEINPUT = "diverse.yaml"
 log = init_logger(log_level=logging.DEBUG, logfile=f"{FILEINPUT}.log")
 
 
@@ -33,7 +33,7 @@ def copy_file(path: str, target: str):
 def import_documents(import_path: str, target_dir: str = None):
     log.debug(f" ----- Directory: {import_path} -----")
     base_path, directory_name = os.path.split(os.path.normpath(import_path))
-    if directory_name in import_config.excludes:
+    if import_config.excludes and directory_name in import_config.excludes:
         log.debug(f"  ! EXCLUDE {import_path}")
         return
     if import_config.flatten and directory_name in import_config.flatten:
